@@ -13,17 +13,17 @@ export class Operation {
 
     returnValues(){
         const array = [...this.newArray];
-        console.log((array.length - 1) / 2);
         for (let i = 1; i <= ((array.length - 1) / 2); i++){
             const [number1, operator, number2] = this.newArray.splice(0, 3).map(value => value);
             const result = this.calculate(number1, operator, number2);
             this.newArray.splice(0, 0, result);
-            console.log(this.newArray);
         }
+
         return this.newArray[0];
     };
 
     calculate(number1, operation, number2) {
+
         return (operation === 'X') ? (number1 * number2) 
              : (operation === '/') ? (number1 / number2) 
              : (operation === '+') ? (number1 + number2) 
@@ -32,6 +32,7 @@ export class Operation {
     }
 
     main(){
+        this.newArray = [];
         if (this.array.length === 3) {
             return this.calculate(this.array[0], this.array[1], this.array[2]);
         } else {

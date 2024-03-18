@@ -83,7 +83,8 @@ const stringsView = ( value ) => {
 }
 
 const Clear = () => {
-    numbers, strings = '';
+    numbers = '';
+    strings = '';
     data = [];
     toggleOperations( 'button', true );
 }

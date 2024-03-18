@@ -44,26 +44,33 @@ export class Historial {
     }
 
     addRemoveEvent( e, id, result ){
-        const buttonType = ( e.target.closest( '.add, .remove' ).className );
-        if ( buttonType === 'add' ){
-            buttonValue( result );
-        } else {
-            this.historial = this.historial.filter( element => element.id !== id );
-            localStorage.setItem('historial', JSON.stringify( this.historial ));
-            this.renderHistorial();
+        const classname = e.target.closest( '.add, .remove');
+        if ( classname ){
+            switch( classname.className ){
+            case 'add':
+                buttonValue( result );
+            case 'remove':
+                this.historial = this.historial.filter( element => element.id !== id );
+                localStorage.setItem('historial', JSON.stringify( this.historial ));
+                this.renderHistorial();
+            }
         }
     }
 
     loadHistorial(){
         if (localStorage.getItem( 'historial' )){
             this.historial = JSON.parse(localStorage.getItem( 'historial' ));
-        }
+        } 
         this.renderHistorial();
     }
 
     saveHistorial( data ){
         const storedHistorial = JSON.parse( localStorage.getItem( 'historial' ) );
+        if (storedHistorial){
         this.historial = [ data, ...storedHistorial ];
+        } else{
+            this.historial = [ data ];
+        } 
         localStorage.setItem( 'historial', JSON.stringify( this.historial ) );
         this.renderHistorial();
     }
